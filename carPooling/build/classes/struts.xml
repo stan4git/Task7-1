@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="action" extends="struts-default">	
+	
+    <!-- register -->
+	<action name="register_*" class="action.register" method="{1}">
+			<result name="success">/index.jsp</result>
+					<result name="registerfail">/register.jsp</result>
+					<result name="cancel">/index.jsp</result>
+		</action>
+		
+	<!-- change password -->
+		<action name="changepassword_*" class="action.register" method="{1}">
+			<result name="success" type="redirect">logout_out.action</result>
+					<result name="fail">/changepassword.jsp</result>
+					<result name="cancel">/my-account.jsp</result>
+			
+		</action>
+		
+		<!-- revise user's info -->
+			<action name="reviseprofile_*" class="action.reviseProfile" method="{1}">
+			<result name="success">/reviseprofile.jsp</result>
+			<result name="updatedsuccessfully">/my-account.jsp</result>
+			<result name="cancel">/my-account.jsp</result>
+			<result name="fail" type="redirect">reviseprofile_getInfo.action</result>
+			
+		</action>
+		
+	
+	<action name="login_*" class="action.login" method="{1}">
+			<result name="success">/my-account.jsp</result>
+			<result name="loginfalse">/login.jsp</result>
+			<result name="needlogin">/login.jsp</result>
+			<result name="noneedlogin" type="redirect">login_directlogin.action</result> 
+		</action>
+		
+	<action name="logout_*" class="action.logOut" method="{1}">
+			<result name="out">/index.jsp</result>
+		</action>
+		
+	<action name="postAsDriver_*" class="action.postAsDriver" method="{1}">
+			<result name="success">/my-account.jsp</result>
+			<result name="nopost">/my-account.jsp</result>
+			<result name="retype">/Dpost.jsp</result>
+			<result name="cancel">/my-account.jsp</result>
+		</action>
+		
+	<action name="postAsPassenger_*" class="action.postAsPassenger" method="{1}">
+			<result name="success">/my-account.jsp</result>
+			<result name="nopost">/my-account.jsp</result>
+			<result name="retype">/Ppost.jsp</result>
+			<result name="cancel">/my-account.jsp</result>
+		</action>
+	
+	
+		<action name="findDriver_*" class="action.findDriver" method="{1}">
+			<result name="success">/finddriver.jsp</result>
+			<result name="seedetailsok">/detailsoffinddriver.jsp</result>
+		</action>
+		
+		 <action name="findPassenger_*" class="action.findPassenger" method="{1}">
+				<result name="success">/findpassenger.jsp</result>
+			<result name="seedetailsok">/detailsoffindpassenger.jsp</result>
+		</action>
+		
+	    <action name="searchdriver_*" class="action.searchDriver" method="{1}">
+			<result name="success">/finddriver.jsp</result>
+		    <result name="rechoose" type="redirect">findDriver_find.action</result>
+		</action>
+		
+		  <action name="searchpassenger_*" class="action.searchPassenger" method="{1}">
+			<result name="success">/findpassenger.jsp</result>
+			  <result name="rechoose" type="redirect">findPassenger_find.action</result>
+		</action>
+		
+		
+		   <action name="passengerApplyParticipation_*" class="action.passengerApplyParticipation" method="{1}">
+			<result name="success">/index.jsp</result>
+				<result name="fail">/index.jsp</result>
+				<result name="duplicate" type="redirect">findDriver_find.action</result>
+					<result name="needlogin" type="redirect">/login.jsp</result>
+		</action>
+		
+		      <action name="passengerApplyParticipation_*" class="action.passengerApplyParticipation" method="{1}">
+			<result name="success">/index.jsp</result>
+				<result name="fail">/index.jsp</result>
+				<result name="duplicate" type="redirect">findPassenger_find.action</result>
+					<result name="needlogin" type="redirect">/login.jsp</result>
+		</action>
+		   
+		
+		     <action name="driverApplyParticipation_*" class="action.driverApplyParticipation" method="{1}">
+			<result name="success">/index.jsp</result>
+				<result name="fail">/index.jsp</result>
+				<result name="duplicate" type="redirect">findDriver_find.action</result>
+				<result name="needlogin" type="redirect">/login.jsp</result>
+				
+		</action>
+		
+		    <!--  manage post as driver -->
+		        <action name="managepost_*" class="action.managePost" method="{1}">
+			<result name="success">/managepostasdriver.jsp</result>
+			<result name="ok">/driverseepassengers.jsp</result>
+			<result name="seedriverok">/passengerseedrivers.jsp</result>
+			<result name="managepostaspassengerok">/managepostaspassenger.jsp</result>
+			<result name="deletepostok" type="redirect">managepost_asDriver.action</result>
+			<result name="nodeletepost" type="redirect">managepost_asDriver.action</result>
+			<result name="deletepostok2" type="redirect">managepost_asPassenger.action</result>
+			<result name="nodeletepost2" type="redirect">managepost_asPassenger.action</result>
+			
+		</action>
+		
+		         <!--  manage participated post as passenger -->
+		 <action name="manageparticipatedpost_*" class="action.manageParticipatedPost" method="{1}">
+			<result name="success">/participatedpostasdriver.jsp</result>
+			<result name="seedetailsok">/detailsofselectedpassengerpost.jsp</result>
+			<result name="deleteandupdateok" type="redirect">manageparticipatedpost_asDriver.action</result>
+			<result name="nodeleteandupdate" type="redirect">manageparticipatedpost_asDriver.action</result>
+			<result name="success2">/participatedpostaspassenger.jsp</result>
+			<result name="seedetailsok2">/detailsofselecteddriverpost.jsp</result>
+			<result name="deleteandupdateok2" type="redirect">manageparticipatedpost_asPassenger.action</result>
+			<result name="nodeleteandupdate2" type="redirect">manageparticipatedpost_asPassenger.action</result>
+			
+			
+		</action>
+		
+		
+	</package>
+	
+</struts>

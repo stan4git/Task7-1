@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orm.postasdriver">
+
+<resultMap type="model.postasdriver" id="postasdriver">
+		<id property="postID" column="postID" jdbcType="VARCHAR" javaType="java.lang.String" />		
+		<result property="email" column="email"  />
+			<result property="departure" column="departure"  />
+			<result property="destination" column="destination"  />
+			<result property="departuredate" column="departuredate"  />
+			<result property="estimatedleavingtime" column="estimatedleavingtime"  />
+			<result property="availableseats" column="availableseats"  />
+			<result property="cartype" column="cartype"  />
+			<result property="estimatedtotalcost" column="estimatedtotalcost"  />
+			<result property="estimatedcostperpassenger" column="estimatedcostperpassenger"  />
+			<result property="phone" column="phone"  />
+			<result property="memo" column="memo"  />
+			<result property="numberofappliedpassengers" column="numberofappliedpassengers"  />
+	
+	</resultMap>
+	
+  <select id="selectAllPostAsDriver" resultMap="postasdriver">
+    select * from postasdriver
+  </select> 
+  
+   <select id="selectpostbydriveremail" resultMap="postasdriver">
+    select * from postasdriver  where email=#{email}
+  </select> 
+  
+    <select id="searchDriver" resultMap="postasdriver">
+    select * from postasdriver where departure=#{departure} and destination=#{destination} and departuredate=#{departuredate} and availableseats=#{availableseats}
+  </select> 
+  
+  <select id="selectPostByID" resultMap="postasdriver">
+    select * from postasdriver where postID=#{postID}
+  </select> 
+  
+  
+  <insert id="insertpostasdriver"  parameterType="postasdriver">
+  insert into postasdriver(postID,email,departure,destination,departuredate,estimatedleavingtime,availableseats,cartype,estimatedtotalcost,estimatedcostperpassenger,phone,memo,numberofappliedpassengers)
+  VALUES (#{postID},#{email},#{departure},#{destination},#{departuredate},#{estimatedleavingtime},#{availableseats},#{cartype},#{estimatedtotalcost},#{estimatedcostperpassenger},#{phone},#{memo},#{numberofappliedpassengers})
+  </insert>
+  
+  <update id="updatenumberofappliedpassengers"  parameterType="postasdriver">
+  update postasdriver set postasdriver.numberofappliedpassengers=#{numberofappliedpassengers} where postID=#{postID};
+  </update>
+  
+   <delete id="deletedriverpost" parameterType="postasdriver"> 
+    delete from postasdriver where postID=#{postID}
+  </delete>
+</mapper>

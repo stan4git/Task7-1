@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orm.passengerapply">
+
+<resultMap type="model.passengerapply" id="passengerapply">
+		<id property="driverpostID" column="driverpostID" jdbcType="VARCHAR" javaType="java.lang.String" />		
+		<id property="passengeremail" column="passengeremail"  />
+				<result property="driveremail" column="driveremail"  />	
+			
+	</resultMap>
+
+  
+  <select id="selectpassengerapply" resultMap="passengerapply">
+    select * from passengerapply where driverpostID=#{driverpostID} and passengeremail=#{passengeremail}
+  </select> 
+  
+   <select id="selectpassengerapplybypostID" resultMap="passengerapply">
+    select * from passengerapply where driverpostID=#{driverpostID} 
+  </select> 
+  
+     <select id="selectpassengerapplybypassengeremail" resultMap="passengerapply">
+    select * from passengerapply where passengeremail=#{passengeremail} 
+  </select>
+  
+  <insert id="insertnewpassengerapply"  parameterType="passengerapply">
+  insert into passengerapply(driverpostID,passengeremail,driveremail)
+  VALUES (#{driverpostID},#{passengeremail},#{driveremail})
+  </insert>
+  
+   <delete id="deleteparticipation2" parameterType="passengerapply"> 
+    delete from passengerapply where driverpostID=#{driverpostID} and passengeremail=#{passengeremail}
+  </delete>
+  
+    <delete id="deletepost" parameterType="passengerapply"> 
+    delete from passengerapply where driverpostID=#{driverpostID}
+  </delete>
+  
+</mapper>
